@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Paginator Filter{% endblock %}
+
+{% load crispy_forms_tags %} 
+{% block content %}  
+<button type="button" class="btn btn-primary" onclick="location.href='{% url 'create' %}'">Novo Produto</button> 
+<p>Paginator Filter</p>
+<table class="table">
+	<thead>
+		<tr>
+			<th scope="col">#</th>
+			<th scope="col">Nome</th>
+			<th scope="col">Preço</th>
+			<th scope="col">Descrição</th>
+			<th scope="col">Ação</th>
+		</tr>
+	</thead>
+	{% for obj in object_list %}
+	<tbody>
+		<tr>
+			<td scope="row">{{ obj.id }}</td>
+			<td scope="row">{{ obj.nome }}</td>
+			<td scope="row">{{ obj.preco }}</td>
+			<td scope="row">{{ obj.descricao }}</td>  
+			<td>
+				<a class="mx-2 link-secondary" href="#"><i class="far fa-file fa-2x"></i></a>
+				<a class="mx-2 link-danger" href="#"><i class="fas fa-trash fa-2x"></i></a>
+			</td>
+		</tr>
+	</tbody>
+	{% endfor %}
+</table>  
+{% endblock %}
