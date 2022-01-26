@@ -1,0 +1,2 @@
+# paginatorFilter
+Paginação com filtro.
