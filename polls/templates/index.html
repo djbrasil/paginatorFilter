@@ -1,10 +1,16 @@
 {% extends 'base.html' %}
 {% block title %}Paginator Filter{% endblock %}
 
-{% load crispy_forms_tags %} 
+{% load widget_tweaks %}
 {% block content %}  
+
 <button type="button" class="btn btn-primary" onclick="location.href='{% url 'create' %}'">Novo Produto</button> 
-<p>Paginator Filter</p>
+  
+<form method="get">
+        <input id="nome" type="text" name="nome" class="form-control" placeholder="Pesquisar..." />
+</form>
+
+
 <table class="table">
 	<thead>
 		<tr>
@@ -15,19 +21,38 @@
 			<th scope="col">Ação</th>
 		</tr>
 	</thead>
-	{% for obj in object_list %}
+	
 	<tbody>
+                {% for obj in object_list %}
 		<tr>
 			<td scope="row">{{ obj.id }}</td>
 			<td scope="row">{{ obj.nome }}</td>
 			<td scope="row">{{ obj.preco }}</td>
 			<td scope="row">{{ obj.descricao }}</td>  
 			<td>
-				<a class="mx-2 link-secondary" href="#"><i class="far fa-file fa-2x"></i></a>
-				<a class="mx-2 link-danger" href="#"><i class="fas fa-trash fa-2x"></i></a>
-			</td>
-		</tr>
+				<a class="mx-2 link-secondary" href="{% url 'update' obj.pk %}"><i class="far fa-file fa-2x"></i></a>
+                                <a class="mx-2 link-danger" href="{% url 'delete' obj.pk %}"><i class="fas fa-trash fa-2x"></i></a>
+
+
+ 			</td>
+		</tr> 
+                {% empty %}
+                <tr>
+                        <td colspan="7" class="text-center bg-light">Sem Produtos</td>
+                </tr>
+                {% endfor %}
 	</tbody>
-	{% endfor %}
-</table>  
+
+       
+</table>   
+
+<div class="p-5">
+        {% include 'page.html' %}
+</div>
+
+
+{% endblock %} 
+
+
+{% block script %} 
 {% endblock %}
